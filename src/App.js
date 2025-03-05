@@ -6,9 +6,12 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutSuccessPage from "./pages/CheckoutSuccessPage";
 import ContactPage from "./pages/ContactPage";
+import GlobalStyles from "./styles/GlobalStyles";
 
 const App = () => {
   return (
+    <>
+    <GlobalStyles />
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>  
@@ -21,6 +24,7 @@ const App = () => {
         </Route>
       </Routes>
     </Router>
+    </>
   );
 };
 

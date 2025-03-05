@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const ProductPage = () => {
   const { id } = useParams();
+  const { addToCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);  // Ny state for loading
-  const [error, setError] = useState(null);  // Ny state for feilhåndtering
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setLoading(true);
-    setError(null);
-
     fetch(`https://v2.api.noroff.dev/online-shop/${id}`)
       .then((res) => {
         if (!res.ok) {
@@ -19,27 +19,25 @@ const ProductPage = () => {
         return res.json();
       })
       .then((data) => {
-        setProduct(data);
+        setProduct(data.data);
         setLoading(false);
       })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
-  }, [id]);  // ✅ useEffect kjører hver gang `id` endres
+  }, [id]);
 
-  // ✅ Viser feilmelding hvis API-kallet feiler
   if (error) return <p>Error: {error}</p>;
-
-  // ✅ Viser en "loading"-melding mens data hentes
   if (loading) return <p>Henter produktet... Vennligst vent.</p>;
 
   return (
     <>
       <h1>{product.title}</h1>
-      <img src={product.imageUrl} alt={product.title} />
+      <img src={product.image.url} alt={product.title} />
       <p>{product.description}</p>
       <p>{product.discountedPrice} NOK</p>
+      <button onClick={() => addToCart(product)}>Add to Cart</button>
     </>
   );
 };
