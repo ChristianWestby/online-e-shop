@@ -1,13 +1,13 @@
 import { createContext, useState } from "react";
+import PropTypes from "prop-types"; // 👈 Løser prop-types-feilen
 
-// ✅ Opprett konteksten
 export const CartContext = createContext();
 
-// ✅ Opprett `CartProvider`
-  export const CartProvider = ({ children }) => {
+export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
+    console.log("Legger til i cart:", product); 
     setCart((prevCart) => [...prevCart, product]);
   };
 
@@ -26,4 +26,8 @@ export const CartContext = createContext();
   );
 };
 
-// ✅ Eksporter både `CartContext` og `CartProvider`
+
+CartProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
