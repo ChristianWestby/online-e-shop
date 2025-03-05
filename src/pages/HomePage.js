@@ -34,7 +34,7 @@ const HomePage = () => {
       <div className="product-list">
         {Array.isArray(products) && products.map((product) => (
           <div key={product.id} className="product-card">
-            <img src={product.imageUrl} alt={product.title} />
+            <img src={product.image.url} alt={product.title} />
             <h3>{product.title}</h3>
             <p>{product.discountedPrice} NOK</p>
             <Link to={`/product/${product.id}`}>View Product</Link>

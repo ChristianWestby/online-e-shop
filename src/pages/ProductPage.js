@@ -34,7 +34,11 @@ const ProductPage = () => {
   return (
     <>
       <h1>{product.title}</h1>
-      <img src={product.image.url} alt={product.title} />
+      <img 
+        src={product.image?.url || "https://via.placeholder.com/150"} 
+        alt={product.title} 
+        onError={(e) => e.target.src = "https://via.placeholder.com/150"} 
+      />
       <p>{product.description}</p>
       <p>{product.discountedPrice} NOK</p>
       <button onClick={() => addToCart(product)}>Add to Cart</button>

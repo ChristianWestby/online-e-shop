@@ -7,11 +7,13 @@ import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutSuccessPage from "./pages/CheckoutSuccessPage";
 import ContactPage from "./pages/ContactPage";
 import GlobalStyles from "./styles/GlobalStyles";
+import { CartProvider } from "./context/CartContext";  
 
 const App = () => {
   return (
     <>
     <GlobalStyles />
+    <CartProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>  
@@ -24,6 +26,7 @@ const App = () => {
         </Route>
       </Routes>
     </Router>
+    </CartProvider>
     </>
   );
 };

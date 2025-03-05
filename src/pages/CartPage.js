@@ -19,6 +19,7 @@ const CartPage = () => {
               <li key={index}>
                 <h3>{item.title}</h3>
                 <p>{item.discountedPrice} NOK</p>
+                {/* ✅ Fjernet `addToCart` her */}
                 <button onClick={() => removeFromCart(item.id)}>Remove</button>
               </li>
             ))}
