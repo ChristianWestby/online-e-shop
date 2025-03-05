@@ -10,16 +10,16 @@ import ContactPage from "./pages/ContactPage";
 const App = () => {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="/" element={<Layout />}>  
+          <Route index element={<HomePage />} />
+          <Route path="product/:id" element={<ProductPage />} />  
+          <Route path="cart" element={<CartPage />} />  
+          <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="checkout-success" element={<CheckoutSuccessPage />} />
+          <Route path="contact" element={<ContactPage />} />
+        </Route>
+      </Routes>
     </Router>
   );
 };
