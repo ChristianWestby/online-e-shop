@@ -1,17 +1,14 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import { Link } from "react-router-dom";
+import Nav from "./Nav";
 
 const Header = () => {
-  const { cart } = useContext(CartContext);
+  const { cart } = useContext(CartContext);  // ✅ Henter handlekurv-data
 
   return (
     <header>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/cart">🛒 Cart ({cart.length})</Link>  {/* 🔹 Link til handlekurven */}
-      </nav>
+      <h1>eCom Shop 🛒 ({cart.length})</h1> {/* ✅ Viser antall varer i handlekurven */}
+      <Nav />
     </header>
   );
 };

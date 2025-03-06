@@ -23,7 +23,7 @@ const HomePage = () => {
   }, []);
 
   // ✅ Viser "Laster inn..." mens API-et henter data
-  if (loading) return <p>Laster inn produkter...</p>;
+  if (loading) return <p>Loading products...</p>;
 
   // ✅ Viser feilmelding hvis API-kallet feiler
   if (error) return <p>Feil: {error}</p>;

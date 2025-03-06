@@ -13,7 +13,7 @@ const App = () => {
   return (
     <>
     <GlobalStyles /> 
-    
+   
         <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -26,7 +26,7 @@ const App = () => {
             </Route>
           </Routes>
         </Router>
-        
+      
     </>
   );
 };

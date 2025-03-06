@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const ProductPage = () => {
   }, [id]);
 
   if (error) return <p>Error: {error}</p>;
-  if (loading) return <p>Henter produktet... Vennligst vent.</p>;
+  if (loading) return <p>Getting your items... Please wait!</p>;
 
   return (
     <>
@@ -42,6 +43,8 @@ const ProductPage = () => {
       <p>{product.description}</p>
       <p>{product.discountedPrice} NOK</p>
       <button onClick={() => addToCart(product)}>Add to Cart</button>
+      <Link to="/"><button>Continue to shop</button></Link>
+      <Link to="/checkout"><button>Proceed to Checkout</button></Link>
     </>
   );
 };
