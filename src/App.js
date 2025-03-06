@@ -7,7 +7,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutSuccessPage from "./pages/CheckoutSuccessPage";
 import ContactPage from "./pages/ContactPage";
 import GlobalStyles from "./styles/GlobalStyles";
- // ✅ Riktig import
+
 
 const App = () => {
   return (
