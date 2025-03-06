@@ -85,6 +85,7 @@ const CheckoutPage = () => {
             <br />
             <button type="submit">Complete purches</button>
           </form>
+          
         </>
       )}
     </div>

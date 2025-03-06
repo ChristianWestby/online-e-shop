@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
-import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -30,7 +29,7 @@ const ProductPage = () => {
   }, [id]);
 
   if (error) return <p>Error: {error}</p>;
-  if (loading) return <p>Getting your items... Please wait!</p>;
+  if (loading) return <p>Henter produktet... Vennligst vent.</p>;
 
   return (
     <>
@@ -41,10 +40,43 @@ const ProductPage = () => {
         onError={(e) => e.target.src = "https://via.placeholder.com/150"} 
       />
       <p>{product.description}</p>
-      <p>{product.discountedPrice} NOK</p>
+
+      {/* 🔹 Anmeldelser (Reviews) */}
+      <h2>Reviews:</h2>
+      {product.reviews && product.reviews.length > 0 ? (
+        <ul>
+          {product.reviews.map((review) => (
+            <li key={review.id}>
+              <strong>{review.username}:</strong> {review.description} ({review.rating}/5)
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No reviews available for this product.</p>
+      )}
+
+      {/* 🔹 Pris-delen */}
+      {product.price > product.discountedPrice ? (
+        <>
+          <p>Original Price: <s>{product.price} NOK</s></p>
+          <p>
+            Discount: {((1 - product.discountedPrice / product.price) * 100).toFixed(0)}% 
+            ({(product.price - product.discountedPrice).toFixed(2)} NOK)
+          </p>
+          <p>Discounted Price: {product.discountedPrice} NOK</p>
+        </>
+      ) : (
+        <p>Price: {product.price} NOK</p>
+      )}
+
+      {/* 🔹 Knapper */}
       <button onClick={() => addToCart(product)}>Add to Cart</button>
-      <Link to="/"><button>Continue to shop</button></Link>
-      <Link to="/checkout"><button>Proceed to Checkout</button></Link>
+      <Link to="/cart">
+        <button>Go to Checkout</button>
+      </Link>
+      <Link to="/">
+        <button>Continue Shopping</button>
+      </Link>
     </>
   );
 };
