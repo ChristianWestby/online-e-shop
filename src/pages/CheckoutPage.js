@@ -9,7 +9,6 @@ const CheckoutPage = () => {
   
   const totalPrice = cart.reduce((sum, item) => sum + item.discountedPrice, 0).toFixed(2);
 
-  // ✅ State for checkout-form
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
     email: "",
@@ -71,7 +70,9 @@ const CheckoutPage = () => {
                 required
               />
             </label>
+
             <br />
+            
             <label>
               Adress:
               <input
@@ -82,10 +83,11 @@ const CheckoutPage = () => {
                 required
               />
             </label>
+            
             <br />
+
             <button type="submit">Complete purches</button>
           </form>
-          
         </>
       )}
     </div>

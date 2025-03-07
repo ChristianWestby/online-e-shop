@@ -10,8 +10,7 @@ const CheckoutSuccessPage = () => {
         <button>Continue Shopping</button>
       </Link>
       </div>   
-    );
-   
+    ); 
   };
  
   export default CheckoutSuccessPage;

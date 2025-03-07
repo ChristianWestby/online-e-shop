@@ -24,7 +24,7 @@ const HomePage = () => {
   }, []);
 
   if (loading) return <p>Loading products...</p>;
-  if (error) return <p>Feil: {error}</p>;
+  if (error) return <p>Error: {error}</p>;
 
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

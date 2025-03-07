@@ -14,7 +14,7 @@ const ProductPage = () => {
     fetch(`https://v2.api.noroff.dev/online-shop/${id}`)
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Produktet ble ikke funnet");
+          throw new Error("Product is not found");
         }
         return res.json();
       })
@@ -29,7 +29,7 @@ const ProductPage = () => {
   }, [id]);
 
   if (error) return <p>Error: {error}</p>;
-  if (loading) return <p>Henter produktet... Vennligst vent.</p>;
+  if (loading) return <p>Getting your products... Please wait!</p>;
 
   return (
     <>
@@ -41,7 +41,6 @@ const ProductPage = () => {
       />
       <p>{product.description}</p>
 
-      {/* 🔹 Anmeldelser (Reviews) */}
       <h2>Reviews:</h2>
       {product.reviews && product.reviews.length > 0 ? (
         <ul>
@@ -55,7 +54,6 @@ const ProductPage = () => {
         <p>No reviews available for this product.</p>
       )}
 
-      {/* 🔹 Pris-delen */}
       {product.price > product.discountedPrice ? (
         <>
           <p>Original Price: <s>{product.price} NOK</s></p>
@@ -66,10 +64,9 @@ const ProductPage = () => {
           <p>Discounted Price: {product.discountedPrice} NOK</p>
         </>
       ) : (
-        <p>Price: {product.price} NOK</p>
+          <p>Price: {product.price} NOK</p>
       )}
 
-      {/* 🔹 Knapper */}
       <button onClick={() => addToCart(product)}>Add to Cart</button>
       <Link to="/cart">
         <button>Go to Checkout</button>

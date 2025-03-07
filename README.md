@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# Online e-Shop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📌 Project Overview
 
-## Available Scripts
+This is a React-based eCommerce web application where users can browse products, add items to a cart, and proceed to checkout. The project fetches data from the Noroff Online Shop API.
 
-In the project directory, you can run:
+## 🚀 Getting Started
 
-### `npm start`
+To run this project locally, follow the steps below.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Ensure you have the following installed:
 
-### `npm test`
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- npm (Comes with Node.js) or yarn
+- A terminal or command prompt
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 📥 Installation
 
-### `npm run build`
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/ChristianWestby/online-e-shop.git
+   ```
+2. **Navigate to the project folder**:
+   ```sh
+   cd online-e-shop
+   ```
+3. **Install dependencies**:
+   ```sh
+   npm install
+   ```
+   *or*
+   ```sh
+   yarn install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### ▶️ Running the Application
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To start the development server:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+npm start
+```
 
-### `npm run eject`
+*or*
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```sh
+yarn start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This will open the project in your browser at: [http://localhost:3000](http://localhost:3000)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 📦 Building for Production
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To create a production-ready build, run:
 
-## Learn More
+```sh
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This will generate an optimized `build/` folder containing static files for deployment.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🛠 Features
 
-### Code Splitting
+- 📌 Homepage with product listing and search functionality
+- 🛒 Cart system (add/remove items, adjust quantities, clear cart)
+- 🔍 Search products by name and tags
+- 🏷️ Display of original price, discount percentage, and final price
+- 📝 Individual product pages with reviews
+- ✅ Checkout page with order confirmation
+- 📩 Contact page with validation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📡 API
 
-### Analyzing the Bundle Size
+This project fetches products from the Noroff Online Shop API:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **Base API URL:** `https://v2.api.noroff.dev/online-shop`
+- **Single product:** `https://v2.api.noroff.dev/online-shop/{id}`
 
-### Making a Progressive Web App
+## 🔥 Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+📂 online-e-shop
+├── 📂 public        # Static assets (HTML, favicon, etc.)
+├── 📂 src           # Source files
+│   ├── 📂 components  # Reusable UI components (Header, Footer, Cart Icon, etc.)
+│   ├── 📂 context     # Global state management (CartContext.js)
+│   ├── 📂 pages       # Page components (HomePage, ProductPage, CartPage, etc.)
+│   ├── 📂 styles      # Global and modular styles
+│   ├── App.js        # Main React component
+│   ├── index.js      # Entry point
+│   ├── routes.js     # App routing (if applicable)
+├── .gitignore     # Ignore unnecessary files in Git
+├── package.json   # Project metadata & dependencies
+└── README.md      # Project documentation
+```
 
-### Advanced Configuration
+## 🔄 Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is deployed using [Netlify](https://www.netlify.com/) or [Vercel](https://vercel.com/). To deploy, follow these steps:
 
-### Deployment
+1. Push your latest changes to GitHub.
+2. Connect the repository to Netlify/Vercel.
+3. Set up automatic deployments.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## ❓ Troubleshooting
 
-### `npm run build` fails to minify
+### Port Already in Use
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If `npm start` fails because port 3000 is in use, run:
+
+```sh
+kill $(lsof -t -i:3000)
+```
+
+Then restart the server with:
+
+```sh
+npm start
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+💡 **Contributions & Issues**: If you find any bugs or have feature requests, feel free to open an issue or contribute via pull requests!
+
