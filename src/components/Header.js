@@ -1,13 +1,12 @@
 
-import Nav from "./Nav";
+import Navbar from "./Navbar";
 
 const Header = () => {
   
 
   return (
     <header>
-      <h1>Online eCom Shop</h1> 
-      <Nav />
+      <Navbar />
     </header>
   );
 };
