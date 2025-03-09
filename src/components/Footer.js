@@ -1,14 +1,11 @@
 import styled from "styled-components";
 
-// 📌 Stil for Footer
 const FooterContainer = styled.footer`
-  background: black;   /* 🎨 Svart bakgrunn */
-  color: white;        /* 🎨 Hvit tekst */
-  height: 100px;        /* 🎯 Høyde på 70px */
-  display: flex;       
-  align-items: center; /* 📌 Sentrer vertikalt */
-  justify-content: center; /* 📌 Sentrer horisontalt */
-  font-size: 16px;     
+  background-color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.white};
+  text-align: center;
+  padding: 20px;
+  height: 70px; /* 🔹 Sørger for at footeren har en fast høyde */
 `;
 
 const Footer = () => {

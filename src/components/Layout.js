@@ -1,17 +1,30 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import { CartProvider } from "../context/CartContext"; // 🔥 Importer CartProvider
+import styled from "styled-components";
+
+// 📌 **Wrapper som dekker hele skjermen**
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Sørger for at siden alltid er minst 100% av skjermen */
+`;
+
+// 📌 **Main tar opp all tilgjengelig plass**
+const MainContent = styled.main`
+  flex: 1; /* Skyver footeren til bunnen */
+  padding: ${({ theme }) => theme.spacing.large};
+`;
 
 const Layout = () => {
   return (
-    <CartProvider> {/* 🔥 Nå får hele applikasjonen tilgang til cart-tilstanden */}
+    <PageWrapper>
       <Header />
-      <main> 
+      <MainContent>
         <Outlet />
-      </main>
+      </MainContent>
       <Footer />
-    </CartProvider>
+    </PageWrapper>
   );
 };
 

@@ -2,26 +2,32 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { CartContext } from "../context/CartContext"; // 🔥 Henter CartContext
+import { CartContext } from "../context/CartContext";
+import { media, flexCenter, boxShadow } from "../styles/mixins"; // 🚀 Importer mixins
 
 const Navbar = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  background: rgb(159, 177, 213);
-  color: white;
+  padding: ${({ theme }) => theme.spacing.medium} ${({ theme }) => theme.spacing.large}; /* 🔹 Mer padding på sidene */
+  background: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.white};
   position: relative;
   z-index: 1000;
+  ${boxShadow}
+
+  ${media.medium`
+    flex-direction: column;
+    text-align: center;
+  `}
 `;
 
+// 📌 **Logo - Flyttet litt lenger inn**
 const Logo = styled.div`
-  display: flex;
+  ${flexCenter}
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: black;
-  color: white;
+  background: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 18px;
   font-weight: bold;
   width: 80px;
@@ -30,23 +36,24 @@ const Logo = styled.div`
   border-radius: 5px;
   padding: 5px;
   line-height: 1.2;
+  margin-left: ${({ theme }) => theme.spacing.large}; /* 🔹 Justert venstre marg */
 `;
 
 const CartLink = styled.div`
-  margin-left: auto;
   font-size: 18px;
   position: relative;
+  margin-right: ${({ theme }) => theme.spacing.large}; /* 🔹 Justert høyre marg */
 
   a {
     text-decoration: none;
-    color: white;
+    color: ${({ theme }) => theme.colors.white};
     font-weight: bold;
   }
 `;
 
 const CartCount = styled.span`
-  background: red;
-  color: white;
+  background: ${({ theme }) => theme.colors.danger};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 12px;
   font-weight: bold;
   border-radius: 50%;
@@ -56,20 +63,21 @@ const CartCount = styled.span`
   right: -10px;
 `;
 
-// 📌 **Burger-meny (for mobilvisning)**
+// 📌 **Burger-meny (Kun synlig på mobil)**
 const Burger = styled.div`
   display: none;
   cursor: pointer;
   z-index: 1100;
+  margin-right: ${({ theme }) => theme.spacing.medium}; /* 🔹 Justerer plassering */
 
-  @media only screen and (max-width: 768px) {
+  ${media.medium`
     display: block;
-  }
+  `}
 `;
 
-function NavbarComponents() {
+function NavbarComponent() {
   const [open, setOpen] = useState(false);
-  const { cart } = useContext(CartContext); // 🔥 Henter cart fra CartContext
+  const { cart } = useContext(CartContext);
 
   return (
     <>
@@ -92,4 +100,4 @@ function NavbarComponents() {
   );
 }
 
-export default NavbarComponents;
+export default NavbarComponent;

@@ -8,9 +8,9 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: ${({ theme }) => theme.fonts.body}; /* 🔹 Bruker font fra theme */
+    background-color: ${({ theme }) => theme.colors.background}; /* 🔹 Bruker farge fra theme */
+    color: ${({ theme }) => theme.colors.text};
   }
 
   h1, h2, h3 {
@@ -25,13 +25,13 @@ const GlobalStyles = createGlobalStyle`
   .product-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+    gap: ${({ theme }) => theme.spacing.medium}; /* 🔹 Bruker spacing fra theme */
+    padding: ${({ theme }) => theme.spacing.medium};
   }
 
   .product-card {
-    background: white;
-    padding: 15px;
+    background: ${({ theme }) => theme.colors.white}; /* 🔹 Hvitt kort */
+    padding: ${({ theme }) => theme.spacing.medium};
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 250px;
@@ -44,16 +44,16 @@ const GlobalStyles = createGlobalStyle`
   }
 
   button {
-    background: #007bff;
-    color: white;
+    background: ${({ theme }) => theme.colors.primary}; /* 🔹 Bruker primary fra theme */
+    color: ${({ theme }) => theme.colors.white};
     border: none;
-    padding: 10px;
-    margin-top: 10px;
+    padding: ${({ theme }) => theme.spacing.small};
+    margin-top: ${({ theme }) => theme.spacing.small};
     cursor: pointer;
   }
 
   button:hover {
-    background: #0056b3;
+    background: ${({ theme }) => theme.colors.secondary}; /* 🔹 Endrer til secondary */
   }
 `;
 
