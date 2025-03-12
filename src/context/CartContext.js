@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
 
 export const CartContext = createContext();
 
@@ -7,7 +7,7 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
-    console.log("Legger til i cart:", product); 
+    console.log("Legger til i cart:", product);
     setCart((prevCart) => [...prevCart, product]);
   };
 
@@ -20,14 +20,14 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
 
-
-  CartProvider.propTypes = {
+CartProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-

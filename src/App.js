@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import theme from "./styles/theme"; // ✅ Importerer temaet
+import theme from "./styles/theme"; 
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
@@ -12,7 +12,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}> {/* ✅ ThemeProvider omslutter hele appen */}
+    <ThemeProvider theme={theme}> 
       <GlobalStyles />
       <Router>
         <Routes>

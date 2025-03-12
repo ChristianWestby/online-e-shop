@@ -1,48 +1,76 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa"; // 🔍 Importerer søkeikon
+import { FaSearch } from "react-icons/fa";
+import { boxShadow } from "../styles/mixins";
 
-// 📌 Grid-container for produkter
-const ProductList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-  gap: 20px;
+const HeaderSection = styled.div`
+  width: 100%;
+  max-width: 1400px;
+  height: 250px;
+  margin: 0 auto;
   padding: 20px;
-  justify-items: center;
+  text-align: center;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)),
+    url("https://source.unsplash.com/1400x400/?shopping,store") center/cover
+      no-repeat;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ${boxShadow};
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 18px;
+    max-width: 800px;
+  }
 `;
 
-// 📌 Stil for hvert produktkort
+const ProductGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 20px;
+  ${boxShadow}
+  border-radius: 10px;
+  background: #f8f8f8;
+`;
+
 const ProductCard = styled.div`
-  width: 250px;
-  height: 460px; /* 🔥 Justert høyde for å få plass til rabatten */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
-
+  padding: 20px;
+  border-radius: 12px;
+  ${boxShadow}
+  transition: transform 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
   }
 `;
 
-// 📌 Ensartet bildestørrelse
 const ProductImage = styled.img`
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 8px;
 `;
 
-// 📌 Stil for tittel og tekst
 const ProductTitle = styled.h3`
-  font-size: 16px;
-  margin: 10px 0;
+  font-size: 18px;
+  margin: 12px 0;
 `;
 
 const ProductDescription = styled.p`
@@ -51,9 +79,10 @@ const ProductDescription = styled.p`
   flex-grow: 1;
 `;
 
-// 📌 Pris-styling
 const PriceContainer = styled.div`
-  margin: 10px 0;
+  margin: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 const OriginalPrice = styled.p`
@@ -63,71 +92,61 @@ const OriginalPrice = styled.p`
 `;
 
 const DiscountedPrice = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   color: #d32f2f;
 `;
 
-const DiscountInfo = styled.p`
-  font-size: 14px;
-  color: #d32f2f;
-  font-weight: bold;
-`;
-
-// 📌 Knapper
 const Button = styled(Link)`
   text-decoration: none;
-  background:rgb(110, 182, 197);
+  background: rgb(110, 182, 197);
   color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-size: 14px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 16px;
   transition: background 0.3s ease-in-out;
-
   &:hover {
-    background: #0056b3;
+    background: #f0a500;
   }
 `;
 
-// 📌 Søke-container for sentrert søkefelt med ikon
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px auto;
-  width: 300px; /* 🔥 Gjør søkefeltet smalere */
+  margin: 30px auto;
+  width: 350px;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
+  padding: 8px 12px;
 `;
 
 const SearchIcon = styled(FaSearch)`
   color: #666;
-  font-size: 16px;
-  margin-right: 8px;
+  font-size: 18px;
+  margin-right: 10px;
 `;
 
 const SearchInput = styled.input`
   border: none;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
   flex: 1;
-  padding: 5px;
+  padding: 6px;
 `;
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setLoading(true);
     fetch("https://v2.api.noroff.dev/online-shop")
       .then((res) => res.json())
       .then((data) => {
-        console.log("API-respons:", data);
         setProducts(data.data || []);
         setLoading(false);
       })
@@ -141,16 +160,20 @@ const HomePage = () => {
   if (loading) return <p>Loading products...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) 
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.tags.some((tag) =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase())
+      )
   );
 
   return (
     <>
-    
-
-      {/* 🔍 Søkefelt med ikon */}
+      <HeaderSection>
+        <h1>Welcome to eCom Shop</h1>
+        <p>Find the best deals on all your favorite products!</p>
+      </HeaderSection>
       <SearchContainer>
         <SearchIcon />
         <SearchInput
@@ -161,30 +184,28 @@ const HomePage = () => {
         />
       </SearchContainer>
 
-      <ProductList>
+      <ProductGrid>
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <ProductCard key={product.id}>
               <ProductImage
-                src={product.image?.url || "https://via.placeholder.com/200"}
+                src={product.image?.url || "https://via.placeholder.com/220"}
                 alt={product.title}
-                onError={(e) => (e.target.src = "https://via.placeholder.com/200")}
+                onError={(e) =>
+                  (e.target.src = "https://via.placeholder.com/220")
+                }
               />
 
               <ProductTitle>{product.title}</ProductTitle>
               <ProductDescription>{product.description}</ProductDescription>
 
-              {/* 🔥 Prisvisning - med eller uten rabatt */}
               <PriceContainer>
                 {product.price > product.discountedPrice ? (
                   <>
                     <OriginalPrice>{product.price} NOK</OriginalPrice>
-                    <DiscountInfo>
-                      Rabatt:{" "}
-                      {((1 - product.discountedPrice / product.price) * 100).toFixed(0)}%  
-                      ({(product.price - product.discountedPrice).toFixed(2)} NOK)
-                    </DiscountInfo>
-                    <DiscountedPrice>{product.discountedPrice} NOK</DiscountedPrice>
+                    <DiscountedPrice>
+                      {product.discountedPrice} NOK
+                    </DiscountedPrice>
                   </>
                 ) : (
                   <DiscountedPrice>{product.price} NOK</DiscountedPrice>
@@ -197,7 +218,7 @@ const HomePage = () => {
         ) : (
           <p>No products match your search.</p>
         )}
-      </ProductList>
+      </ProductGrid>
     </>
   );
 };

@@ -3,29 +3,28 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { CartContext } from "../context/CartContext";
-import { media, flexCenter, boxShadow } from "../styles/mixins"; // 🚀 Importer mixins
+import { media, boxShadow } from "../styles/mixins";
 
 const Navbar = styled.nav`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.medium} ${({ theme }) => theme.spacing.large}; /* 🔹 Mer padding på sidene */
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: ${({ theme }) => theme.spacing.medium}
+    ${({ theme }) => theme.spacing.large};
   background: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.white};
   position: relative;
   z-index: 1000;
   ${boxShadow}
-
-  ${media.medium`
-    flex-direction: column;
-    text-align: center;
-  `}
 `;
 
-// 📌 **Logo - Flyttet litt lenger inn**
 const Logo = styled.div`
-  ${flexCenter}
-  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: ${({ theme }) => theme.colors.text};
   color: ${({ theme }) => theme.colors.white};
   font-size: 18px;
@@ -35,14 +34,30 @@ const Logo = styled.div`
   text-align: center;
   border-radius: 5px;
   padding: 5px;
-  line-height: 1.2;
-  margin-left: ${({ theme }) => theme.spacing.large}; /* 🔹 Justert venstre marg */
+  margin-left: 48px; /* 🚀 Justerer for å stå på linje med kortene */
+`;
+
+const NavLinks = styled.div`
+  display: flex;
+  gap: 30px; /* 🔹 Justerer avstand mellom linkene */
+  margin-left: -830px; /* 🚀 Flytter linkene nærmere logo */
+
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.white};
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const CartLink = styled.div`
   font-size: 18px;
   position: relative;
-  margin-right: ${({ theme }) => theme.spacing.large}; /* 🔹 Justert høyre marg */
+  margin-right: 60px; /* 🚀 Matcher venstre marg på logo */
 
   a {
     text-decoration: none;
@@ -63,15 +78,11 @@ const CartCount = styled.span`
   right: -10px;
 `;
 
-// 📌 **Burger-meny (Kun synlig på mobil)**
 const Burger = styled.div`
   display: none;
   cursor: pointer;
   z-index: 1100;
-  margin-right: ${({ theme }) => theme.spacing.medium}; /* 🔹 Justerer plassering */
-
-  ${media.medium`
-    display: block;
+  ${media.medium`display: block;
   `}
 `;
 
@@ -85,6 +96,11 @@ function NavbarComponent() {
         <Logo>
           eCom <br /> Shop
         </Logo>
+
+        <NavLinks>
+          <Link to="/">Home</Link>
+          <Link to="/contact">Contact</Link>
+        </NavLinks>
 
         <CartLink>
           <Link to="/cart">

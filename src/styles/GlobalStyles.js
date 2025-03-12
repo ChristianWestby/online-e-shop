@@ -8,8 +8,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: ${({ theme }) => theme.fonts.body}; /* 🔹 Bruker font fra theme */
-    background-color: ${({ theme }) => theme.colors.background}; /* 🔹 Bruker farge fra theme */
+    font-family: ${({ theme }) => theme.fonts.body}; 
+    background-color: ${({ theme }) => theme.colors.background}; 
     color: ${({ theme }) => theme.colors.text};
   }
 
@@ -25,12 +25,12 @@ const GlobalStyles = createGlobalStyle`
   .product-list {
     display: flex;
     flex-wrap: wrap;
-    gap: ${({ theme }) => theme.spacing.medium}; /* 🔹 Bruker spacing fra theme */
+    gap: ${({ theme }) => theme.spacing.medium};
     padding: ${({ theme }) => theme.spacing.medium};
   }
 
   .product-card {
-    background: ${({ theme }) => theme.colors.white}; /* 🔹 Hvitt kort */
+    background: ${({ theme }) => theme.colors.white}; 
     padding: ${({ theme }) => theme.spacing.medium};
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -44,7 +44,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   button {
-    background: ${({ theme }) => theme.colors.primary}; /* 🔹 Bruker primary fra theme */
+    background: ${({ theme }) => theme.colors.primary}; 
     color: ${({ theme }) => theme.colors.white};
     border: none;
     padding: ${({ theme }) => theme.spacing.small};
@@ -53,7 +53,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   button:hover {
-    background: ${({ theme }) => theme.colors.secondary}; /* 🔹 Endrer til secondary */
+    background: ${({ theme }) => theme.colors.secondary}; 
   }
 `;
 

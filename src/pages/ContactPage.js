@@ -1,5 +1,64 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { boxShadow } from "../styles/mixins"; 
+
+const ContactContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px; 
+  margin: 40px auto; 
+  padding: 20px;
+  ${boxShadow} 
+  transition: transform 0.2s ease-in-out;
+`;
+
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  padding: 30px;
+  background: white;
+  border-radius: 8px;
+  
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  textarea {
+    height: 120px;
+  }
+
+  button {
+    background: rgb(110, 182, 197);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background: #0056b3;
+    }
+  }
+`;
+
+const SuccessMessage = styled.div`
+  text-align: center;
+  color: green;
+  padding: 20px;
+  font-size: 18px;
+`;
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -10,17 +69,15 @@ const ContactPage = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false); 
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    setErrors({ ...errors, [name]: "" }); 
+    setErrors({ ...errors, [name]: "" });
   };
 
-  const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,28 +100,25 @@ const ContactPage = () => {
       setErrors(validationErrors);
       return;
     }
-
-    console.log("Submitted Data:", formData);
     
     setSubmitted(true);
     setFormData({ fullName: "", subject: "", email: "", body: "" });
   };
 
   return (
-    <div>
+    <ContactContainer>
       <h1>Contact Us</h1>
 
       {submitted ? (
-        <div className="success-message">
+        <SuccessMessage>
           <h2>Message Sent Successfully!</h2>
           <p>Thank you for reaching out. We will get back to you soon.</p>
           <Link to="/">
             <button>Back to Home</button>
           </Link>
-        </div>
+        </SuccessMessage>
       ) : (
-        <form onSubmit={handleSubmit}>
-      
+        <FormWrapper onSubmit={handleSubmit}>
           <label>
             Full Name:
             <input
@@ -76,7 +130,7 @@ const ContactPage = () => {
             {errors.fullName && <p className="error">{errors.fullName}</p>}
           </label>
 
-         
+
           <label>
             Subject:
             <input
@@ -108,11 +162,11 @@ const ContactPage = () => {
             />
             {errors.body && <p className="error">{errors.body}</p>}
           </label>
-          
+
           <button type="submit">Send</button>
-        </form>
+        </FormWrapper>
       )}
-    </div>
+    </ContactContainer>
   );
 };
 
